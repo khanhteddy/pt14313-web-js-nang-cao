@@ -1,0 +1,62 @@
+<script>
+    // tạo ra 1 đối tượng trong js object literals
+    var person = {
+        
+        name: "Ngo Van Long", // Thuộc tính key: value (giá trị số, chuỗi, mảng, object,... - không phải là function),
+        age: 20,
+        eat: function(){ // phương thức key: value (phải là function - trong function - đc phép sử dụng từ khóa this => object đang đc định nghĩa),
+            alert(this.name + " đang ăn cơm");
+        }
+    };
+
+    var hang = {
+        __proto__: person
+    };
+    hang.name = "Nguyen Thi Hang";
+
+    function Student(){ // giống như 1 class trong php2
+        var mssv = "01010";
+        
+        var learning = function(){
+            console.log(`Sinh viên auto học lại!`);
+        }
+    }
+
+    var long = new Student();
+
+    console.log(long);
+/**
+    // Object literals: 
+    // không thể tạo thực thể đc
+    // không kế thừa (nếu như không sử dụng __proto__)
+
+
+    person.weight = 90;
+
+    console.log(person);
+    // 5 phút để thực hiện
+
+    // object constructor function
+    function Student(mssv, name){ // giống như 1 class trong php2
+        this.mssv = mssv;
+        this.name = name;
+        this.learning = function(){
+            console.log(`Sinh viên ${this.mssv} - ${this.name} auto học lại!`);
+        }
+    }
+    Student.prototype.hoclai = function(){
+        alert(`Em tên là ${this.name}, em học lại môn gì đó!`);
+    }
+
+    // tạo ra 1 thực thể mới thuộc kiểu dữ liệu Student
+    var Dung = new Student('ph01234', "Văn Thị Vở Dung");
+    var Long = new Student('ph08219', "Nguyễn Văn Long");
+
+    console.log(Dung, Long);
+    Dung.learning();
+    Long.learning();
+
+
+**/
+
+</script>

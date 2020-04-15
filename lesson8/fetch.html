@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        var apiUrl = "https://5e7487579dff1200163537d7.mockapi.io/hotels";
+        // fetch - là hàm để gửi request từ code javascript => server để lấy dữ liệu
+        // không biết server sẽ mất bao lâu để trả về đc kết quả cho chúng ta
+        fetch(apiUrl, {method: 'get'})
+            .then(response => response.json())
+            .then(result => {
+                console.log(result);
+            })
+        
+        // var hotels = fetch(apiUrl);
+        // console.log(hotels);
+        // console.log(0);
+
+        // setTimeout(function(){
+        //     console.log(1);
+        // }, 5000);
+        
+        // setTimeout(function(){
+        //     console.log(2);
+        // }, 4000);
+        
+        // setTimeout(function(){
+        //     console.log(3);
+        // }, 3000);
+
+        // setTimeout(function(){
+        //     console.log(4);
+        // }, 2000);
+
+        // setTimeout(function(){
+        //     console.log(5);
+        // }, 1000);
+
+        // var promise = new Promise(function(resolve, reject){
+        //     console.log(0);
+        //     return resolve();
+        // });
+
+        // promise
+        // .then(function(){
+        //     return new Promise(function(resolve, reject){
+        //         setTimeout(function(){
+        //             console.log(1);
+        //             return resolve();
+        //         }, 5000);
+        //     })
+        // })
+        // .then(function(){
+        //     return new Promise(function(resolve, reject){
+        //         setTimeout(function(){
+        //             console.log(2);
+        //             return resolve();
+        //         }, 4000);
+        //     })
+        // })
+    </script>
+</body>
+</html>

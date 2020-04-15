@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <script>
+
+        var str = "hello world";
+        var arr = str.split('');
+        var result = _.map(arr, (val, ind) => {
+            if(ind == 0 || arr[ind-1] === " "){
+                return val.toUpperCase();
+            }
+            return val;
+        })
+        console.log(result);
+    </script>
+</body>
+</html>
