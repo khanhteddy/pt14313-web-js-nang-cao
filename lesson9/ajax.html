@@ -34,7 +34,7 @@
 
                 var content = ``;
                 data.forEach(element => {
-                    content += `<tr>
+                    content += `<tr id="row-${element.id}">
                                     <td>${element.id}</td>
                                     <td>${element.name}</td>
                                     <td>
@@ -43,7 +43,7 @@
                                     <td>${element.address}</td>
                                     <td>
                                         <button class="btn btn-sm btn-primary">Sửa</button>  
-                                        <button class="btn btn-sm btn-danger">Xóa</button>  
+                                        <button class="btn btn-sm btn-danger"  onclick="removeElement(${element.id})">Xóa</button>  
                                     </td>
                     
                                 </tr>`;
@@ -51,6 +51,19 @@
                 document.querySelector('tbody').innerHTML = content;
             }
         });
+
+        function removeElement(id){
+            var removeNode = document.querySelector('#row-'+id);
+            removeNode.parentNode.removeChild(removeNode);
+            var removeUrl = requestUrl + "/" + id;
+            fetch(removeUrl, {
+                method: "DELETE"
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+        }
     </script>
 </body>
 </html>
