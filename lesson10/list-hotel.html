@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách khách sạn</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <table class="table table-stripped">
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Logo</th>
+            <th>Address</th>
+            <th>
+                <button class="btn btn-sm btn-success">Thêm mới</button>
+            </th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        var apiUrl = 'https://5e96a07f5b19f10016b5e716.mockapi.io/hotels';
+        axios.get(apiUrl)
+        .then(res => {
+            if(res.statusText === "OK"){
+                document.querySelector('tbody').innerHTML = '';
+                var data = res.data;
+                var content = ``;
+                data.forEach(element => {
+                    content += `<tr id="row-${element.id}">
+                                    <td>${element.id}</td>
+                                    <td>${element.name}</td>
+                                    <td>
+                                        <img src="${element.logo}" width="100px" class="img img-avatar"/>
+                                    </td>
+                                    <td>${element.address}</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary">Sửa</button>  
+                                        <button class="btn btn-sm btn-danger"  onclick="removeElement(${element.id})">Xóa</button>  
+                                    </td>
+                    
+                                </tr>`;
+                });
+                document.querySelector('tbody').innerHTML = content;
+            }
+        })
+    </script>
+</body>
+</html>
