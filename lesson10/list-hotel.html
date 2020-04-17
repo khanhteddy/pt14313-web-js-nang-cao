@@ -23,6 +23,8 @@
     </table>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    
     <script>
         var apiUrl = 'https://5e96a07f5b19f10016b5e716.mockapi.io/hotels';
         axios.get(apiUrl)
@@ -49,6 +51,41 @@
                 document.querySelector('tbody').innerHTML = content;
             }
         })
+        
+        function removeElement(removeId){
+            // confirm
+            Swal.fire({
+            title: 'Chắc chắn xóa hotels?',
+            text: "Sau khi xóa sẽ không lấy lại dữ liệu được!",
+            icon: 'danger',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý!',
+            cancelButtonText: 'Không đồng ý!'
+            }).then((result) => {
+                if (result.value) {
+                    // gửi request lên server
+                    var deleteUrl = apiUrl + "/" + removeId;
+                    axios.delete(deleteUrl)
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .then(() => {
+                        var removeElement = document.querySelector('#row-' + removeId);
+                        removeElement.remove();
+                        Swal.fire({
+                            position: 'bottom-end',
+                            icon: 'success',
+                            title: 'Đã xóa',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    });
+                }
+            })
+
+        }
     </script>
 </body>
 </html>
