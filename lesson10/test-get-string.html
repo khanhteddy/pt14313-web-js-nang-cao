@@ -2,5 +2,6 @@
 
 const urlParams = new URLSearchParams(window.location.search);
 const name = urlParams.get('name');
-document.write(name);
+const age = urlParams.get('age');
+document.write(name + "-" + age);
 </script>
