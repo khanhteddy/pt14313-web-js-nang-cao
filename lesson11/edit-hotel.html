@@ -38,10 +38,11 @@
     <script>
         const apiUrl = 'https://5e96a07f5b19f10016b5e716.mockapi.io/hotels';
         var hotelInfo = {};
+        var id = null;
         function getHotelInfor(){
             // 1. lấy tham số id trên đường dẫn
             const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
+            id = urlParams.get('id');
             // 2. gửi request lên mock api để lấy thông tin của khách sạn về
             const getHotelInfoUrl = apiUrl + "/" + id;
             axios.get(getHotelInfoUrl)
@@ -58,7 +59,21 @@
         }
         
         function editHotel(){
-
+            const name = document.querySelector('[name="name"]').value;
+            const logo = document.querySelector('[name="logo"]').value;
+            const address = document.querySelector('[name="address"]').value;
+            hotelInfo.name = name;
+            hotelInfo.logo = logo;
+            hotelInfo.address = address;
+            // gửi request lên mockapi để thêm khách sạn
+            const updateHotelUrl = apiUrl + "/" + id;
+            axios.put(updateHotelUrl, hotelInfo)
+            .then(data => {
+                if(data.statusText === "OK"){
+                    window.location.href = 'index.html';
+                }
+            })
+            return false;
         }
     </script>
 </body>
