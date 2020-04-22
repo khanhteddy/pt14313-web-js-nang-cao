@@ -6,17 +6,8 @@
     <title>Thêm mới khách sạn</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
-        /**
-        * Form Validation Errors
-        */
-        .error {
-            border-color: red;
-        }
-
-        .error-message {
+        [data-type="validator-error"]{
             color: red;
-            font-style: italic;
-            margin-bottom: 1em;
         }
     </style>
 </head>
@@ -27,18 +18,18 @@
         <h2>Thêm mới khách sạn</h2>
         <div class="row">
             <div class="col-6 offset-3">
-                <form onsubmit="return addHotel()" id="add-hotel-form">
+                <form id="add-hotel-form">
                     <div class="form-group">
                         <label for="">Tên khách sạn</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <input type="text" name="name" class="form-control" data-rule="required|minlength-4">
                     </div>
                     <div class="form-group">
                         <label for="">Ảnh logo</label>
-                        <input type="text" name="logo" class="form-control" required>
+                        <input type="text" name="logo" class="form-control" data-rule="required">
                     </div>
                     <div class="form-group">
                         <label for="">Địa chỉ khách sạn</label>
-                        <input type="text" name="address" class="form-control" required>
+                        <input type="text" name="address" class="form-control" data-rule="required">
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-sm btn-primary">Lưu</button>&nbsp;
@@ -49,21 +40,32 @@
         </div>
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- Always get the latest version -->
-    <!-- Not recommended for production sites! -->
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer/dist/bouncer.polyfills.min.js"></script>
-
-    <!-- Get minor updates and patch fixes within a major version -->
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer@1/dist/bouncer.polyfills.min.js"></script>
-
-    <!-- Get patch fixes within a minor version -->
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer@1.0/dist/bouncer.polyfills.min.js"></script>
-
-    <!-- Get a specific version -->
-    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/bouncer@1.0.0/dist/bouncer.polyfills.min.js"></script>
+    <script src="./js/js-form-validator.min.js"></script>
     <script>
         const apiUrl = 'https://5e96a07f5b19f10016b5e716.mockapi.io/hotels';
+        var validator = new Validator(document.querySelector('#add-hotel-form'), function(err, res){
+            if(res === true){
+                addHotel();
+            }
+
+            return false;
+        }, {
+            messages: {
+                en: {
+                    required: {
+                        empty: 'Không được để trống',
+                        incorrect: 'Nhập sai thông tin'
+                    },
+                    minlength: {
+                        empty: 'Hãy nhập tối thiểu {0} ký tự',
+                        incorrect: 'Hãy nhập tối thiểu {0} ký tự'
+                    }
+                }
+            }
+        });
+
         function addHotel(){
+            
             const name = document.querySelector('[name="name"]').value;
             const logo = document.querySelector('[name="logo"]').value;
             const address = document.querySelector('[name="address"]').value;
@@ -79,10 +81,9 @@
                     window.location.href = 'index.html';
                 }
             })
-            return false;
         }
 
-        var validate = new Bouncer('#add-hotel-form');
+        
     </script>
 </body>
 </html>
