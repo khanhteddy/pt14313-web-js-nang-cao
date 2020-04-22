@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Ảnh logo</label>
-                        <input type="text" name="logo" class="form-control" data-rule="required">
+                        <input type="text" name="logo" class="form-control" data-rule="required|checkImgUrl">
                     </div>
                     <div class="form-group">
                         <label for="">Địa chỉ khách sạn</label>
@@ -50,6 +50,11 @@
 
             return false;
         }, {
+            rules: {
+                checkImgUrl: function(value){
+                    return (/\.(gif|jpe?g|tiff|png|webp|bmp)$/i).test(value);
+                }
+            },
             messages: {
                 en: {
                     required: {
@@ -59,6 +64,10 @@
                     minlength: {
                         empty: 'Hãy nhập tối thiểu {0} ký tự',
                         incorrect: 'Hãy nhập tối thiểu {0} ký tự'
+                    },
+                    checkImgUrl: {
+                        empty: 'Nhập đường dẫn ảnh',
+                        incorrect: 'Đường dẫn ảnh không đúng định dạng'
                     }
                 }
             }
