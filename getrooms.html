@@ -1,0 +1,28 @@
+<script>
+
+    const hotelsApi = `https://5e96a07f5b19f10016b5e716.mockapi.io/hotels`;;
+    let hotels = [], rooms = [];
+
+    fetch(hotelsApi)
+    .then(response => response.json())
+    .then(hotels => {
+        let hotelsPromise = hotels.map(hotel => {
+            let getRoomsByHotelApi = `${hotelsApi}/${hotel.id}/rooms`;
+            return fetch(getRoomsByHotelApi)
+                .then(response => response.json())
+                .then(roomsData => {
+                    return roomsData;
+                });
+        });
+        return Promise.all(hotelsPromise);
+    })
+    .then(listRoom => {
+        // listRoom.map(roomArr => {
+        //     rooms = rooms.concat(roomArr);
+        // })
+        rooms.push(...listRoom);
+        console.log(rooms);
+    });
+
+
+</script>

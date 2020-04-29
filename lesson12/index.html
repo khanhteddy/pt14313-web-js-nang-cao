@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <p id="target">hello world!</p>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script>
+        // document.querySelector('#target').innerText = "hello poly!";
+        $('#target').text('hello poly!');
+
+        // document.querySelector('#target').onmouseover = function(){
+        //     this.style.background = "green";
+        // }
+        // document.querySelector('#target').onmouseout = function(){
+        //     this.style.background = "white";
+        // }
+        var status = 0;
+        $('#target').on('mouseover mouseout click', function(){
+            if(status == 0){
+                $(this).css('background', 'green');
+                status = 1;
+            }else{
+                $(this).css('background', 'white');
+                status = 0;
+            }
+        })
+    </script>
+</body>
+</html>
